@@ -9,9 +9,10 @@ import {
   Vignette,
 } from "@react-three/postprocessing";
 import type { BloomEffect, ChromaticAberrationEffect } from "postprocessing";
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { scrollState } from "@/lib/scroll";
+import { getPerformanceConfig } from "@/lib/performance";
 import { useUIStore } from "@/lib/store";
 import CameraRig from "./CameraRig";
 import Rocket from "./Rocket";
@@ -151,11 +152,12 @@ function ImpactPostSurge({
 export default function Experience() {
   const bloomRef = useRef<BloomEffect | null>(null);
   const chromaRef = useRef<ChromaticAberrationEffect | null>(null);
+  const perf = useMemo(() => getPerformanceConfig(), []);
 
   return (
     <div className="fixed inset-0 z-0" aria-hidden>
       <Canvas
-        dpr={[1, 1.75]}
+        dpr={perf.dpr}
         gl={{
           // The EffectComposer renders via its own targets — canvas MSAA
           // would only burn memory without touching the composed output
@@ -190,7 +192,7 @@ export default function Experience() {
               compile, so no later shader recompile when models stream in. */}
           <Environment
             files="/hdri/dikhololo_night_1k.hdr"
-            environmentIntensity={0.5}
+            environmentIntensity={perf.envIntensity}
           />
 
           <CameraRig />
@@ -201,19 +203,28 @@ export default function Experience() {
           <ProjectOrbit />
           <SunImpact />
 
-          <EffectComposer multisampling={4}>
+          <EffectComposer multisampling={perf.multisampling}>
             <Bloom
               ref={bloomRef}
-              intensity={0.95}
-              luminanceThreshold={0.22}
+              intensity={perf.bloomIntensity}
+              luminanceThreshold={perf.bloomThreshold}
               luminanceSmoothing={0.9}
               mipmapBlur
             />
-            <ChromaticAberration ref={chromaRef} offset={[0.0004, 0.0004]} />
-            <Vignette eskil={false} offset={0.18} darkness={0.82} />
+            {perf.chromaticAberration && (
+              <ChromaticAberration ref={chromaRef} offset={[0.0004, 0.0004]} />
+            )}
+            {perf.vignette && (
+              <Vignette eskil={false} offset={0.18} darkness={0.82} />
+            )}
           </EffectComposer>
 
-          <ImpactPostSurge bloom={bloomRef} chroma={chromaRef} />
+          {perf.chromaticAberration && (
+            <ImpactPostSurge bloom={bloomRef} chroma={chromaRef} />
+          )}
+          {!perf.chromaticAberration && (
+            <ImpactPostSurge bloom={bloomRef} chroma={{ current: null }} />
+          )}
           <SceneReady />
         </Suspense>
 

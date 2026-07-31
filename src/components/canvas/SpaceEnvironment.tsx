@@ -12,6 +12,7 @@ import {
 } from "@/lib/journey";
 import { scrollState } from "@/lib/scroll";
 import { makeGlowTexture } from "@/lib/textures";
+import { getPerformanceConfig } from "@/lib/performance";
 
 useTexture.preload("/textures/6k_stars_milky_way.webp");
 useTexture.preload("/textures/2k_moon.webp");
@@ -138,21 +139,23 @@ void main() {
 
 
 /* ------------------------------------------------------------------ */
-/* Constants                                                           */
+/* Constants (scaled by performance tier)                              */
 /* ------------------------------------------------------------------ */
 
-const COMET_COUNT = 220;
+const _perf = typeof window !== "undefined" ? getPerformanceConfig() : null;
+
+const COMET_COUNT = _perf?.cometCount ?? 220;
 const COMET_X = 45;
 const COMET_Y = 25;
 const COMET_Z_NEAR = 15;
 const COMET_Z_SPAN = 305; // z in [15, -290]
 
-const WARP_COUNT = 350;
+const WARP_COUNT = _perf?.warpCount ?? 350;
 const WARP_NEAR = 20;
 const WARP_SPAN = 140; // z in [camZ-20, camZ-160]
 
-const AST_COUNT = 130;
-const AST_STEP = 30; // instances tumbled per frame (round-robin)
+const AST_COUNT = _perf?.asteroidCount ?? 130;
+const AST_STEP = _perf?.asteroidStep ?? 30; // instances tumbled per frame (round-robin)
 
 /* ------------------------------------------------------------------ */
 
@@ -161,19 +164,22 @@ export default function SpaceEnvironment() {
   const warpSpeed = useRef(0);
   const astCursor = useRef(0);
 
+  const perf = useMemo(() => getPerformanceConfig(), []);
+
   /* -------- Milky Way skybox (real panorama) -------- */
   const [milkyWay, moonTex] = useTexture(
     ["/textures/6k_stars_milky_way.webp", "/textures/2k_moon.webp"],
     (t) => {
       for (const tex of Array.isArray(t) ? t : [t]) {
         tex.colorSpace = THREE.SRGBColorSpace;
-        tex.anisotropy = 8;
+        tex.anisotropy = perf.tier === "high" ? 8 : 4;
       }
     }
   );
 
   const sky = useMemo(() => {
-    const geo = new THREE.SphereGeometry(340, 64, 40);
+    const [segs, rings] = perf.skySegments;
+    const geo = new THREE.SphereGeometry(340, segs, rings);
     const mat = new THREE.ShaderMaterial({
       vertexShader: SKY_VERT,
       fragmentShader: SKY_FRAG,
@@ -518,8 +524,8 @@ export default function SpaceEnvironment() {
       {/* Infinity layer: nebula skybox + far starfields, follow the camera */}
       <group ref={envGroup}>
         <mesh geometry={sky.geo} material={sky.mat} renderOrder={-1} />
-        <Stars radius={170} depth={60} count={4000} factor={3} saturation={0} fade speed={0.4} />
-        <Stars radius={300} depth={60} count={2500} factor={5} saturation={0} fade speed={0.4} />
+        <Stars radius={170} depth={60} count={perf.starCounts[0]} factor={3} saturation={0} fade speed={0.4} />
+        <Stars radius={300} depth={60} count={perf.starCounts[1]} factor={5} saturation={0} fade speed={0.4} />
       </group>
 
       {/* Comet streaks / warp lines / asteroid fields */}
@@ -529,7 +535,7 @@ export default function SpaceEnvironment() {
 
       {/* Ambient sparkle clusters */}
       <Sparkles
-        count={60}
+        count={perf.sparkleCounts[0]}
         scale={[14, 8, 6]}
         position={[0, 0, -2]}
         size={2.5}
@@ -537,7 +543,7 @@ export default function SpaceEnvironment() {
         color="#7df9ff"
       />
       <Sparkles
-        count={80}
+        count={perf.sparkleCounts[1]}
         scale={[24, 12, 30]}
         position={[SKILLS_CENTER.x, SKILLS_CENTER.y, SKILLS_CENTER.z]}
         size={3}
