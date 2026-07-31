@@ -87,7 +87,7 @@ export default function HeroOverlay() {
           {/* Name — gradient fill over a soft glow layer */}
           <motion.h1
             variants={item}
-            className="relative font-display text-5xl font-bold uppercase leading-none tracking-[0.05em] lg:text-7xl"
+            className="relative font-display text-3xl font-bold uppercase leading-none tracking-[0.05em] sm:text-5xl lg:text-7xl"
           >
             <span
               aria-hidden

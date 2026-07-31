@@ -1,10 +1,11 @@
 "use client";
 
 import { useFrame, useThree } from "@react-three/fiber";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { sampleCamera } from "@/lib/journey";
 import { scrollState } from "@/lib/scroll";
+import { isMobileDevice } from "@/lib/performance";
 
 /** Preallocated scratch for the impact recoil (zero per-frame allocation). */
 const _recoil = new THREE.Vector3();
@@ -12,6 +13,8 @@ const _recoil = new THREE.Vector3();
 /**
  * Drives the camera along the journey path from scroll progress,
  * with critically-damped smoothing plus subtle mouse parallax.
+ * On mobile: parallax is disabled (no mouse), and shake is reduced
+ * to prevent motion sickness and keep text readable on small screens.
  */
 export default function CameraRig() {
   const smoothP = useRef(0);
@@ -20,6 +23,7 @@ export default function CameraRig() {
   const mouse = useRef({ x: 0, y: 0 });
   const shake = useRef(0);
   const size = useThree((s) => s.size);
+  const mobile = useMemo(() => isMobileDevice(), []);
 
   useFrame((state, dt) => {
     const cam = state.camera as THREE.PerspectiveCamera;
@@ -35,27 +39,31 @@ export default function CameraRig() {
 
     const fov = sampleCamera(p, pos.current, tgt.current);
 
-    // Mouse parallax (stronger in the hero, gentler in flight)
-    const px = state.pointer.x;
-    const py = state.pointer.y;
-    mouse.current.x = THREE.MathUtils.damp(mouse.current.x, px, 4, dt);
-    mouse.current.y = THREE.MathUtils.damp(mouse.current.y, py, 4, dt);
-    const heroness = 1 - THREE.MathUtils.smoothstep(p, 0.05, 0.2);
-    const amt = 0.55 * heroness + 0.28;
-    pos.current.x += mouse.current.x * amt;
-    pos.current.y += mouse.current.y * amt * 0.6;
+    // Mouse parallax — disabled on mobile (no mouse, saves GPU).
+    // On desktop: stronger in the hero, gentler in flight.
+    if (!mobile) {
+      const px = state.pointer.x;
+      const py = state.pointer.y;
+      mouse.current.x = THREE.MathUtils.damp(mouse.current.x, px, 4, dt);
+      mouse.current.y = THREE.MathUtils.damp(mouse.current.y, py, 4, dt);
+      const heroness = 1 - THREE.MathUtils.smoothstep(p, 0.05, 0.2);
+      const amt = 0.55 * heroness + 0.28;
+      pos.current.x += mouse.current.x * amt;
+      pos.current.y += mouse.current.y * amt * 0.6;
+    }
 
-    // Speed shake while burning hard
+    // Speed shake while burning hard — reduced on mobile for readability
     const v = Math.abs(scrollState.velocity);
+    const shakeScale = mobile ? 0.3 : 1.0; // 70% less shake on mobile
     shake.current = THREE.MathUtils.damp(shake.current, Math.min(v * 6, 1), 4, dt);
     const t = state.clock.elapsedTime;
     // Impact kick — a violent jolt right as the rocket rams the sun,
     // strongest mid-blast and settling once the fireball dissipates.
     const imp = scrollState.impact;
     const impShake = imp * (1 - imp) * 4;
-    const s = shake.current * 0.06 + impShake * 0.11;
-    pos.current.x += Math.sin(t * 31.7) * s + Math.sin(t * 84) * impShake * 0.06;
-    pos.current.y += Math.cos(t * 27.3) * s + Math.cos(t * 77) * impShake * 0.06;
+    const s = (shake.current * 0.06 + impShake * 0.11) * shakeScale;
+    pos.current.x += Math.sin(t * 31.7) * s + Math.sin(t * 84) * impShake * 0.06 * shakeScale;
+    pos.current.y += Math.cos(t * 27.3) * s + Math.cos(t * 77) * impShake * 0.06 * shakeScale;
 
     cam.position.copy(pos.current);
 
@@ -64,7 +72,7 @@ export default function CameraRig() {
     const recoil = THREE.MathUtils.smoothstep(imp, 0.0, 0.12) * (1 - imp) * 2.6;
     if (recoil > 0.001) {
       _recoil.copy(cam.position).sub(tgt.current).normalize();
-      cam.position.addScaledVector(_recoil, recoil);
+      cam.position.addScaledVector(_recoil, recoil * (mobile ? 0.5 : 1.0));
     }
     cam.lookAt(tgt.current);
 

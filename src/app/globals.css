@@ -134,3 +134,41 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* --- Mobile optimizations ----------------------------------------- */
+
+/* Touch devices: ensure minimum tap targets for buttons/links */
+@media (pointer: coarse) {
+  a, button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Small screens: boost text readability against the 3D background */
+@media (max-width: 640px) {
+  /* Stronger text shadows for legibility over WebGL */
+  .hud-corners {
+    border-radius: 1rem;
+  }
+
+  /* Reduce blur on mobile GPUs — backdrop-filter is very expensive */
+  .glass {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* Landscape phones: tighter vertical spacing */
+@media (max-height: 500px) and (pointer: coarse) {
+  .hud-corners {
+    padding: 1rem 1.25rem;
+  }
+}
+
+/* iOS Safari: prevent rubber-band bounce from breaking scroll state */
+@supports (-webkit-touch-callout: none) {
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}

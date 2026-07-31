@@ -133,10 +133,10 @@ export default function SectionOverlays() {
               "0 0 40px rgba(5,8,20,0.7), 0 0 24px rgba(76,201,240,0.1), inset 0 1px 0 rgba(255,255,255,0.08)",
             backdropFilter: "blur(18px)",
           }}
-          className="hud-corners ml-8 w-[470px] max-w-[calc(100vw-4rem)] rounded-2xl border border-hud/25 p-8 lg:ml-16"
+          className="hud-corners ml-4 w-[470px] max-w-[calc(100vw-2rem)] rounded-2xl border border-hud/25 p-5 sm:ml-8 sm:p-8 lg:ml-16"
         >
           <Kicker>01 // About</Kicker>
-          <h2 className="mt-3 font-display text-[40px] font-bold leading-[1.05] text-star">
+          <h2 className="mt-3 font-display text-[28px] font-bold leading-[1.05] text-star sm:text-[40px]">
             Full stack, fewer <span className="text-cyan">bottlenecks</span>
           </h2>
           <p className="mt-5 text-[15px] leading-relaxed text-white/85">
@@ -174,7 +174,7 @@ export default function SectionOverlays() {
               "0 0 40px rgba(5,8,20,0.7), 0 0 24px rgba(76,201,240,0.1), inset 0 1px 0 rgba(255,255,255,0.08)",
             backdropFilter: "blur(18px)",
           }}
-          className="hud-corners pointer-events-auto mr-8 w-[560px] max-w-[calc(100vw-4rem)] rounded-2xl border border-hud/25 p-8 lg:mr-24"
+          className="hud-corners pointer-events-auto mr-4 w-[560px] max-w-[calc(100vw-2rem)] rounded-2xl border border-hud/25 p-5 sm:mr-8 sm:p-8 lg:mr-24"
         >
           <Kicker>02 // Where I&apos;ve worked</Kicker>
 
@@ -235,7 +235,7 @@ export default function SectionOverlays() {
         <div ref={skillsRef} style={HIDDEN} className="px-6 text-center">
           <Kicker>{"// Systems check"}</Kicker>
           <h2
-            className="mt-2 font-display text-[28px] font-bold text-star"
+            className="mt-2 font-display text-[22px] font-bold text-star sm:text-[28px]"
             style={{
               textShadow:
                 "0 0 24px rgba(76,201,240,0.45), 0 0 64px rgba(124,58,237,0.35)",
@@ -254,7 +254,7 @@ export default function SectionOverlays() {
         <div ref={projectsRef} style={HIDDEN}>
           <Kicker>03 // Some things I&apos;ve built</Kicker>
           <h2
-            className="mt-2 font-display text-[34px] font-bold text-star"
+            className="mt-2 font-display text-[26px] font-bold text-star sm:text-[34px]"
             style={{ textShadow: "0 0 28px rgba(124,58,237,0.4)" }}
           >
             Projects in orbit
@@ -307,10 +307,10 @@ export default function SectionOverlays() {
               "0 0 40px rgba(5,8,20,0.7), 0 0 24px rgba(76,201,240,0.1), inset 0 1px 0 rgba(255,255,255,0.08)",
             backdropFilter: "blur(18px)",
           }}
-          className="hud-corners pointer-events-auto mr-8 w-[460px] max-w-[calc(100vw-4rem)] rounded-2xl border border-hud/25 p-8 lg:mr-24"
+          className="hud-corners pointer-events-auto mr-4 w-[460px] max-w-[calc(100vw-2rem)] rounded-2xl border border-hud/25 p-5 sm:mr-8 sm:p-8 lg:mr-24"
         >
           <Kicker>04 // What&apos;s next</Kicker>
-          <h2 className="mt-2 font-display text-[34px] font-bold leading-[1.08] text-star">
+          <h2 className="mt-2 font-display text-[26px] font-bold leading-[1.08] text-star sm:text-[34px]">
             Let&apos;s make something{" "}
             <span className="text-cyan">together</span>.
           </h2>

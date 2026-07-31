@@ -8,6 +8,7 @@ import {
   sectionAt,
   type SectionId,
 } from "./journey";
+import { getPerformanceConfig } from "./performance";
 
 /**
  * Shared, mutable scroll state. Canvas components read this inside
@@ -43,9 +44,48 @@ let lenis: Lenis | null = null;
 export function initSmoothScroll(): () => void {
   if (lenis) return () => {};
 
+  const perf = getPerformanceConfig();
+
+  // On low-tier devices (budget Android Chrome, older iPhone Safari),
+  // skip Lenis entirely. Native scroll is smoother on these devices
+  // because Lenis fights iOS Safari's momentum scroll and Android
+  // Chrome's fling physics, causing janky double-smoothing.
+  if (!perf.smoothScroll) {
+    // Still run the rAF loop to update scrollState for the 3D scene.
+    let lastP = 0;
+    let lastT = performance.now();
+    let raf = 0;
+    const loop = () => {
+      const doc = document.documentElement;
+      const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+      const p = Math.min(1, Math.max(0, window.scrollY / max));
+      const now = performance.now();
+      const dt = Math.max(1, now - lastT) / 1000;
+      const instV = (p - lastP) / dt;
+      scrollState.velocity += (instV - scrollState.velocity) * Math.min(1, dt * 8);
+      scrollState.progress = p;
+      const targetImpact = impactProgress(p);
+      const lambda = targetImpact >= scrollState.impact ? IMPACT_LAMBDA : IMPACT_REVERSE_LAMBDA;
+      scrollState.impact += (targetImpact - scrollState.impact) * (1 - Math.exp(-lambda * dt));
+      lastP = p;
+      lastT = now;
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(raf);
+  }
+
+  // Medium/high tier: use Lenis with tier-tuned settings.
+  // Touch devices get shorter duration + lower multiplier for snappy feel.
+  const isTouchDevice =
+    typeof window !== "undefined" &&
+    window.matchMedia("(pointer: coarse)").matches;
+
   lenis = new Lenis({
-    duration: 1.35,
+    duration: isTouchDevice ? 1.0 : 1.35,
     smoothWheel: true,
+    // On touch, reduce the multiplier so swipes don't overshoot
+    ...(isTouchDevice ? { touchMultiplier: 1.2 } : {}),
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   });
   // Handle for programmatic scroll (nav, tests, console debugging)
