@@ -27,40 +27,36 @@ const jetbrains = JetBrains_Mono({
 });
 
 const TITLE =
-  "Abhishek Badar — Software Development Engineer | React, TypeScript, Flutter & AI";
+  "Vardan Pal — Software Engineer | Cloud-Native & AI";
 const DESCRIPTION =
-  "Abhishek Badar is a Software Development Engineer at Xeo Information Systems (Pune, India) building end-to-end web, mobile, and backend systems with React, Next.js, TypeScript, Laravel, and Flutter — plus AI in production (RAG, Pinecone, OCR). IIT Ropar AI Minor graduate.";
+  "Vardan Pal is a Software Engineer building end-to-end cloud-native and AI systems. Experience with Next.js, Node.js, FastAPI, Docker, and Kubernetes.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: TITLE,
-    template: "%s · Abhishek Badar",
+    template: "%s · Vardan Pal",
   },
   description: DESCRIPTION,
-  applicationName: "Abhishek Badar Portfolio",
+  applicationName: "Vardan Pal Portfolio",
   authors: [{ name: PROFILE.name, url: SITE_URL }],
   creator: PROFILE.name,
   publisher: PROFILE.name,
   category: "technology",
   keywords: [
-    "Abhishek Badar",
-    "Abhishek Badar portfolio",
-    "Software Development Engineer",
+    "Vardan Pal",
+    "Vardan Pal portfolio",
+    "Software Engineer",
     "Full Stack Developer",
     "React Developer",
     "Next.js Developer",
     "TypeScript",
-    "Laravel Developer",
-    "Flutter Developer",
+    "Cloud-Native",
     "AI Engineer",
     "RAG",
-    "Pinecone",
-    "Xeo Information Systems",
-    "IIT Ropar",
-    "RCOEM",
-    "Pune developer",
-    "software engineer India",
+    "Docker",
+    "Kubernetes",
+    "NIT Srinagar",
   ],
   alternates: {
     canonical: "/",
@@ -68,19 +64,19 @@ export const metadata: Metadata = {
   openGraph: {
     type: "profile",
     firstName: PROFILE.firstName,
-    lastName: "Badar",
-    username: "abhishekbadar",
+    lastName: "Pal",
+    username: "vardxn",
     title: TITLE,
     description: DESCRIPTION,
     url: SITE_URL,
-    siteName: "Abhishek Badar Portfolio",
+    siteName: "Vardan Pal Portfolio",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
-    creator: "@abhishekbadar",
+    creator: "@vardxn",
   },
   robots: {
     index: true,
@@ -114,7 +110,7 @@ export const viewport: Viewport = {
 
 /**
  * Rich, linked structured data (schema.org @graph). Answer engines and AI
- * crawlers use this to understand who Abhishek is, what he does, and what
+ * crawlers use this to understand who Vardan is, what he does, and what
  * he has built — the backbone of AEO / AI-SEO. Built from the same content
  * data that drives the site so it never drifts out of sync.
  */
@@ -126,37 +122,29 @@ const jsonLd = {
       "@id": `${SITE_URL}/#person`,
       name: PROFILE.name,
       givenName: PROFILE.firstName,
-      familyName: "Badar",
+      familyName: "Pal",
       jobTitle: PROFILE.role,
       description: PROFILE.bio,
       url: `${SITE_URL}/`,
       email: `mailto:${PROFILE.email}`,
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Pune",
-        addressRegion: "Maharashtra",
+        addressLocality: "Bangalore",
+        addressRegion: "Karnataka",
         addressCountry: "IN",
-      },
-      worksFor: {
-        "@type": "Organization",
-        name: "Xeo Information Systems",
       },
       alumniOf: [
         {
           "@type": "CollegeOrUniversity",
-          name: "Ramdeobaba College of Engineering and Management (RCOEM)",
-        },
-        {
-          "@type": "CollegeOrUniversity",
-          name: "Indian Institute of Technology Ropar (IIT Ropar)",
-        },
+          name: "National Institute of Technology, Srinagar (NIT Srinagar)",
+        }
       ],
       hasOccupation: {
         "@type": "Occupation",
         name: PROFILE.role,
         occupationLocation: {
           "@type": "City",
-          name: "Pune, India",
+          name: "Bangalore, India",
         },
         skills: SKILLS.map((s) => s.items).join(" · "),
       },
@@ -165,31 +153,27 @@ const jsonLd = {
         "Next.js",
         "TypeScript",
         "JavaScript",
-        "Laravel",
-        "PHP",
-        "Flutter",
-        "Dart",
+        "Node.js",
+        "FastAPI",
         "Python",
         "REST APIs",
-        "MySQL",
-        "Firebase",
+        "PostgreSQL",
+        "MongoDB",
+        "Docker",
+        "Kubernetes",
         "Retrieval-Augmented Generation (RAG)",
-        "Pinecone vector database",
-        "OCR",
-        "Workflow automation",
         "Artificial Intelligence",
       ],
       sameAs: [
         PROFILE.socials.github,
         PROFILE.socials.linkedin,
-        PROFILE.socials.medium,
       ],
     },
     {
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
       url: `${SITE_URL}/`,
-      name: "Abhishek Badar Portfolio",
+      name: "Vardan Pal Portfolio",
       description: DESCRIPTION,
       inLanguage: "en",
       publisher: { "@id": `${SITE_URL}/#person` },
@@ -206,7 +190,7 @@ const jsonLd = {
     {
       "@type": "ItemList",
       "@id": `${SITE_URL}/#projects`,
-      name: "Projects by Abhishek Badar",
+      name: "Projects by Vardan Pal",
       numberOfItems: PROJECTS.length,
       itemListElement: PROJECTS.map((p, i) => ({
         "@type": "ListItem",

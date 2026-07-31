@@ -1,38 +1,38 @@
 /** Canonical origin — apex 307-redirects here, so www is the real home. */
-export const SITE_URL = "https://www.abhishekbadar.com";
+export const SITE_URL = "https://vardxn.vercel.app";
 
 export const PROFILE = {
-  name: "Abhishek Badar",
-  firstName: "Abhishek",
-  role: "Software Development Engineer",
-  status: "Software engineer · currently shipping @ Xeo",
+  name: "Vardan Pal",
+  firstName: "Vardan",
+  role: "Software Engineer | Cloud-Native & AI",
+  status: "Software Engineer · Cloud-Native & AI",
   taglines: [
-    "ship AI into real products.",
     "build end-to-end systems.",
+    "architect cloud-native applications.",
+    "integrate AI into real products.",
+    "optimize database and API performance.",
     "automate what slows teams down.",
-    "fix bottlenecks and ship faster.",
-    "architect it, ship it, make it fast.",
   ],
-  bio: "I design and ship products end to end across web, mobile, backends, and the automation between them. At Xeo, I own the full stack: Laravel, Next.js, Flutter from zero. Plus AI in production: RAG with Pinecone, OCR workflows, and automation that cuts real operational drag.",
+  bio: "I am a Cloud-Native & AI Software Engineer studying Information Technology at NIT Srinagar. I design and ship products end to end across web, backend, and cloud infrastructure, specializing in scalable architectures, AI integrations (Agentic AI, RAG, OCR), and performance optimization.",
   about: {
-    lead: "I work across the entire stack to reduce dependencies and move faster. I design APIs, build frontends, and develop mobile apps so products can be shipped without bottlenecks.",
-    p2: "At Xeo, I'm rebuilding a production Laravel system into a modern architecture while delivering a Flutter app from scratch — handling legacy code, performance constraints, and scalability challenges in real-world systems.",
-    p3: "I focus on building simple, fast, and maintainable systems — designed for actual usage, not just clean implementations.",
+    lead: "I work across the entire stack to build fast, scalable, and maintainable systems.",
+    p2: "I have experience working with Next.js, Node.js, FastAPI, Docker, and Kubernetes, shipping real-time routing engines, AI telemedicine platforms, and autonomous PR reviewer systems.",
+    p3: "I focus on building production-ready architectures—optimizing queries, enforcing strict security guardrails, and deploying via CI/CD pipelines.",
     credentials: [
-      "B.Tech, IT — RCOEM (2020–2024)",
-      "AI Minor — IIT Ropar (2024–2025)",
-      "Certified: Azure · AI · Flutter",
-      "Currently @ Xeo, Pune",
+      "B.Tech, IT — NIT Srinagar (2022–2026)",
+      "AWS Certified Cloud Practitioner",
+      "AWS Certified AI Practitioner",
+      "Anthropic Claude Certified",
     ],
   },
-  email: "ab15.badar@gmail.com",
-  location: "Pune, India",
-  resume: "/Resume_AbhishekBadar.pdf",
+  email: "vardan2701@gmail.com",
+  location: "Marathahalli, Bangalore",
+  resume: "/Vardan_Pal_Resume.pdf",
   siteUrl: `${SITE_URL}/`,
   socials: {
-    github: "https://github.com/AbhishekBadar",
-    linkedin: "https://www.linkedin.com/in/abhishekbadar",
-    medium: "https://medium.com/@abhishekbadar",
+    github: "https://github.com/vardxn",
+    linkedin: "https://www.linkedin.com/in/vardxn",
+    medium: "https://github.com/vardxn",
   },
 };
 
@@ -47,41 +47,17 @@ export type Job = {
 
 export const EXPERIENCE: Job[] = [
   {
-    company: "Xeo Information Systems",
-    title: "Software Development Engineer I",
-    range: "Mar 2025 — Present",
-    location: "Pune · Hybrid",
+    company: "Noventiq (Umbrella Infotech)",
+    title: "Software Engineering Intern – Cloud Native Applications",
+    range: "Dec 2024 — Feb 2025",
+    location: "Noida, India",
     blurb:
-      "Leading a frontend replatform, building a Flutter app end-to-end, and designing the Laravel backend that serves both.",
+      "Optimized MongoDB queries, refactored RESTful APIs, and containerized Node.js environments.",
     points: [
-      "Migrating web frontend from Laravel Blade → Next.js (App Router) — scalable routing, reusable component patterns",
-      "Built a reusable React data table abstraction replacing legacy Yajra DataTables — standardized pagination, sorting, server-side data",
-      "Shipped complex form workflows using React Hook Form + Zod for type-safe validation",
-      "Designed Laravel backend architecture serving web + mobile via RESTful APIs",
-      "Built a Flutter app end-to-end for students & parents — fees, events, newsletters, bookings, push notifications. 500+ users",
-      "HMAC-based request auth for mobile API security",
-      "Payment gateway integration + admin dashboard for tracking, dues reports, receipts",
-      "FCM push notifications with deep-link routing",
-    ],
-  },
-  {
-    company: "Refyne",
-    title: "Associate Software Engineer",
-    range: "Aug 2024 — Feb 2025",
-    location: "Bangalore · Full-time",
-    blurb:
-      "Built the internal CRM platform used by 150+ across sales, risk, and growth. Automated the boring parts.",
-    points: [
-      "Built an internal CRM on Firebase Auth + serverless architecture — 150+ active users across sales, risk, and growth",
-      "Firestore data models for real-time deal tracking, activity logs, and threaded communication",
-      "Two-way comment system synced with ClickUp and Postgres — bidirectional sync between CRM and task management",
-      "Dashboards + search filters that cut data retrieval time by 60%; custom export-to-CSV for on-demand reports",
-      "Migrated 50,000+ records from HubSpot → Firebase with validation and consistency checks (+30% query efficiency)",
-      "Automated cross-platform workflows (Slack, Gmail, ClickUp) via N8N — reduced ops overhead ~40%",
-      "Automated user onboarding via Slack APIs + Firebase Admin SDK — cut onboarding from 30 min → under 5 min",
-      "HR chatbot using Pinecone vector DB + LLMs, integrated with Slack (+40% internal support efficiency)",
-      "Resume ingestion + scoring pipeline: Google Drive, OCR, semantic matching against job descriptions",
-      "Integrated Sentry for real-time error monitoring — debugging time down 50%",
+      "Optimized MongoDB queries via compound indexes across 12 microservices, reducing p95 latency by 70%.",
+      "Refactored RESTful APIs using modular Node.js/Express.js; boosted Jest test coverage from 40% to 75%.",
+      "Containerized Node.js environments via Docker Compose, slashing developer onboarding from 2 days to 30 mins.",
+      "Executed agile sprint planning, code reviews, and production deployments via GitHub Actions CI/CD.",
     ],
   },
 ];
@@ -94,12 +70,12 @@ export type Skill = {
 };
 
 export const SKILLS: Skill[] = [
-  { num: "01", name: "Frontend", items: "React · Next.js · Tailwind CSS" },
-  { num: "02", name: "Backend", items: "Laravel · REST APIs · MySQL" },
-  { num: "03", name: "Mobile", items: "Flutter · Dart" },
-  { num: "04", name: "AI & Automation", items: "RAG · Pinecone · OCR · N8N" },
-  { num: "05", name: "Tools & Infra", items: "Firebase · Git · Deployments" },
-  { num: "06", name: "Languages", items: "TypeScript · PHP · Python" },
+  { num: "01", name: "Frontend", items: "React.js · Next.js · TypeScript" },
+  { num: "02", name: "Backend", items: "Node.js · Express.js · FastAPI · Webhooks" },
+  { num: "03", name: "Databases", items: "PostgreSQL · MongoDB · Prisma ORM" },
+  { num: "04", name: "Cloud & DevOps", items: "AWS · Docker · Kubernetes · CI/CD" },
+  { num: "05", name: "AI & ML", items: "PyTorch · Claude 3.5 · Agentic AI · Prompt Eng" },
+  { num: "06", name: "Languages", items: "TypeScript · Python · JavaScript" },
 ];
 
 export type Project = {
@@ -120,96 +96,47 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
-    id: "dospaces",
-    title: "DoSpaces Plugin",
-    meta: "2025 · Open source",
-    tagline: "osTicket attachments, offloaded to the cloud",
+    id: "logipulse",
+    title: "LogiPulse",
+    meta: "2026 · AI-Driven Supply Chain Routing",
+    tagline: "Live routing with Dijkstra/A* and RAG",
     description:
-      "osTicket plugin that offloads ticket attachments to DigitalOcean Spaces with secure public-link generation — cut agent response time by 30%.",
-    tags: ["PHP", "DigitalOcean Spaces", "REST"],
+      "Built OOP-based real-time routing engine with Dijkstra/A*, optimizing paths via live weather and fuel APIs. Designed GPT-4o OCR pipeline leveraging RAG and prompt engineering, cutting manual data entry by 60%.",
+    tags: ["Next.js", "PostgreSQL", "MongoDB", "GPT-4o", "Prisma", "Docker"],
     colorA: "#0069ff",
     colorB: "#4cc9f0",
-    link: null,
+    link: "https://github.com/vardxn/LogiPulse",
+    linkLabel: "View on GitHub",
     featured: true,
   },
   {
-    id: "autoposter",
-    title: "twitter-autoposter",
-    meta: "2026 · AI · Automation",
-    tagline: "A content pipeline that runs itself",
+    id: "devagent-x",
+    title: "DevAgent-X",
+    meta: "2026 · Autonomous PR Reviewer",
+    tagline: "Claude 3.5 code reviews with Docker sandbox",
     description:
-      "End-to-end content pipeline: researches trending topics, generates posts with DeepSeek, queues them into Google Sheets, and routes through a Telegram approval bot. Runs daily on GitHub Actions.",
-    tags: ["Python", "DeepSeek", "Telegram Bot", "Google Sheets", "GH Actions"],
+      "Engineered an Express.js pipeline using GitHub Webhooks to orchestrate automated Claude 3.5 PR code reviews. Architected isolated Docker sandboxes to securely execute and validate untrusted PR code.",
+    tags: ["Node.js", "TypeScript", "Docker", "Claude 3.5", "Webhooks"],
     colorA: "#7c3aed",
-    colorB: "#1da1f2",
-    link: "https://github.com/AbhishekBadar/twitter-autoposter",
-    linkLabel: "View on GitHub",
-  },
-  {
-    id: "claude-tracker",
-    title: "Claude-Tracker",
-    meta: "2026 · macOS · Swift",
-    tagline: "Never blow a quota mid-flow",
-    description:
-      "Native menu-bar app that tracks Claude Code usage across weekly and 5-hour rolling windows so you never blow a quota mid-flow.",
-    tags: ["Swift", "SwiftUI", "macOS"],
-    colorA: "#d97757",
     colorB: "#f0abfc",
-    link: "https://github.com/AbhishekBadar/Claude-Tracker",
+    link: "https://github.com/vardxn/DevAgent-X",
     linkLabel: "View on GitHub",
+    featured: true,
   },
   {
-    id: "save-image-as",
-    title: "Save Image As",
-    meta: "2026 · Chrome extension · Live",
-    tagline: "2.46K+ installs, 1K+ active users",
+    id: "healthease",
+    title: "HealthEase",
+    meta: "2026 · AI-Powered Telemedicine Platform",
+    tagline: "ML inference with FastAPI and Node.js",
     description:
-      "Chrome extension with intelligent file-naming suggestions and streamlined download management. 2.46K+ installs, 1K+ active users, 4.36K+ store page views.",
-    tags: ["JavaScript", "Chrome APIs", "Manifest v3"],
+      "Trained scikit-learn text classifier achieving an 85.4% F1-score. Architected Node.js API gateway routing to FastAPI ML microservices; processed 200+ req/min at p95 <200ms.",
+    tags: ["Node.js", "FastAPI", "MongoDB", "PyTorch", "Socket.IO"],
     colorA: "#34a853",
-    colorB: "#4285f4",
-    link: "https://chromewebstore.google.com/detail/save-image-as/bcngajhkkkhfalgljjjjbjacjcdlophj",
-    linkLabel: "Chrome Web Store",
-  },
-  {
-    id: "puzzleit",
-    title: "PuzzleIT",
-    meta: "2024 · Side project",
-    tagline: "Escape rooms in the browser",
-    description:
-      "Web-based escape-room puzzle game with real-time collaboration. Engaged 200+ participants through challenges that tested lateral thinking.",
-    tags: ["React", "Redux", "MongoDB", "Node"],
-    colorA: "#22d3ee",
-    colorB: "#a3e635",
-    link: "https://github.com/AbhishekBadar/puzzleIT",
+    colorB: "#1da1f2",
+    link: "https://github.com/vardxn/health-ease",
     linkLabel: "View on GitHub",
-  },
-  {
-    id: "traffic-analyzer",
-    title: "Traffic Density Analyzer",
-    meta: "2023 · Research",
-    tagline: "YOLO-powered signal timing",
-    description:
-      "Real-time traffic management using YOLO for vehicle detection and dynamic signal timing. Reduced simulated congestion by 25%.",
-    tags: ["Python", "YOLO", "OpenCV"],
-    colorA: "#ef4444",
-    colorB: "#fbbf24",
-    link: "https://github.com/AbhishekBadar/Traffic-Density-Analyzer",
-    linkLabel: "View on GitHub",
-  },
-  {
-    id: "whilegptthinks",
-    title: "WhileGPTThinks",
-    meta: "2025 · Chrome extension",
-    tagline: "A silly but useful toy",
-    description:
-      "Redirects you to YouTube Shorts while ChatGPT generates a reply, then brings you back when the answer is ready. A silly but useful toy.",
-    tags: ["JavaScript", "Chrome APIs"],
-    colorA: "#ff4444",
-    colorB: "#f0abfc",
-    link: "https://github.com/AbhishekBadar/whilegptthinks",
-    linkLabel: "View on GitHub",
+    featured: true,
   },
 ];
 
-export const ARCHIVE_URL = "https://github.com/AbhishekBadar";
+export const ARCHIVE_URL = "https://github.com/vardxn";
