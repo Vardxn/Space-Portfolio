@@ -211,20 +211,20 @@ export default function Experience() {
               luminanceSmoothing={0.9}
               mipmapBlur
             />
-            {perf.chromaticAberration && (
+            {perf.chromaticAberration ? (
               <ChromaticAberration ref={chromaRef} offset={[0.0004, 0.0004]} />
-            )}
-            {perf.vignette && (
+            ) : <></>}
+            {perf.vignette ? (
               <Vignette eskil={false} offset={0.18} darkness={0.82} />
-            )}
+            ) : <></>}
           </EffectComposer>
 
-          {perf.chromaticAberration && (
+          {perf.chromaticAberration ? (
             <ImpactPostSurge bloom={bloomRef} chroma={chromaRef} />
-          )}
-          {!perf.chromaticAberration && (
+          ) : null}
+          {!perf.chromaticAberration ? (
             <ImpactPostSurge bloom={bloomRef} chroma={{ current: null }} />
-          )}
+          ) : null}
           <SceneReady />
         </Suspense>
 
